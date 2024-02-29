@@ -22,7 +22,7 @@ class RequestToAI:
             messages=[
                 {
                     "role": "system",
-                    "content": "You are an excellent copyrighter.",
+                    "content": "Ты превосходный копирайтер и пишешь тексты на русском языке. Тексты, которые ты пишешь касаются только тематик из списка: Пентхаусы, Квартиры и апартаменты,Виллы и дома,Таунхаусы,Земельные участки,Дуплексы,Жилой комплекс,Коммерческая недвижимость. Никаких других тем. Данные о типе недвидимости будут подаваться в запросе.",
                 },
                 {
                     "role": "user",
@@ -38,6 +38,12 @@ def sanitize(row_str: str) -> str:
         return row_str.replace("\t", "").strip().replace("\r", "")
     else:
         return row_str
+
+
+def check_response(response: str):
+    if len(response) < 200:
+        print(f"Something wrong, response`s length is only {len(response)}")
+        input()
 
 
 in_file = Path("1000.csv")
@@ -97,18 +103,21 @@ def main():
                     prompt_result = request.make_request(prompt, prompt_desc)
 
                     prompt_description = prompt_result.choices[0].message.content
-
+                    check_response(prompt_description)
                     content = (
                         f"{prompt_description} {structure} {parameters} {finish_detail}"
                     )
 
                     completion = request.make_request(description, content)
                     result = completion.choices[0].message.content.replace("\n", "")
+                    check_response(result)
 
                     row.update({"response": f"\t{result}"})
                     writer.writerow(row)
 
-                    print(f"Duration {time()-cur_time}")
+                    print(
+                        f"Iteration #{counter}   Duration time {time()-cur_time} second"
+                    )
                 break
     print(f"Process was working {time()-start_time}")
 
