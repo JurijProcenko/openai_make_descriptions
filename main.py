@@ -84,7 +84,7 @@ def main():
                 reader = csv.DictReader(fi, delimiter=";")
                 for row in reader:
                     counter += 1
-                    if counter == 21:
+                    if counter == 31:
                         break
                     cur_time = time()
                     for k in fields_read:
