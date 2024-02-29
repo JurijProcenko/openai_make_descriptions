@@ -84,7 +84,7 @@ def main():
                 reader = csv.DictReader(fi, delimiter=";")
                 for row in reader:
                     counter += 1
-                    if counter == 5:
+                    if counter == 21:
                         break
                     cur_time = time()
                     for k in fields_read:
@@ -113,5 +113,5 @@ def main():
     print(f"Process was working {time()-start_time}")
 
 
-if __name__ == "__main":
+if __name__ == "__main__":
     main()

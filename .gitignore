@@ -1,1 +1,4 @@
 .env
+__pycache__
+1000.csv
+1000 descriptions.csv
