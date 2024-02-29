@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "openai-make-descriptions"
+version = "0.1.0"
+description = "Create openAI generated descriptions for card product from .xls"
+authors = ["Yurii Protsenko <elsoul@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "3.12"
+openai = "^1.12.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
